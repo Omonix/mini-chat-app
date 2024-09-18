@@ -1,0 +1,464 @@
+* {
+    transition-duration: 300ms;
+}
+:root {
+    --random-color-one: #93EC9C;
+    --random-color-two: #2CA254;
+}
+body {
+    background-color: #202020;
+    color: var(--random-color-one);
+}
+li {
+    list-style-type: none;
+}
+p.activity,
+p.userList,
+p.roomList {
+    font-size: 1.5em;
+    margin: 0.25em 0 0 1em;
+}
+.chatDisplay {
+    text-align: center;
+    width: 100vw;
+    margin: 1em 5em;
+    max-height: 71.5vh;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+.contentChat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.post {
+    font-size: 1.25em;
+    color: black;
+}
+.postText {
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 1.75em;
+    color: black;
+    word-wrap: break-word;
+}
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.1em 1em;
+    font-size: 1.2em;
+    color: black;
+    border-bottom: solid 3px var(--random-color-one);
+}
+.postHeaderUser {
+    border-top-right-radius: 5px;
+    border-bottom: solid 3px var(--random-color-two);
+}
+.infoUser {
+    display: flex;
+    flex-direction: column;
+}
+.footer {
+    display: flex;
+    justify-content: space-around;
+}
+.postRight,
+.postLeft {
+    margin: 0.75em 1em;
+    min-width: 15em;
+    max-width: 42.5em;
+    text-align: left;
+}
+.postLeft {
+    background-color: var(--random-color-one);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: fit-content;
+    margin-left: auto;
+}
+.postRight {
+    background-color: var(--random-color-two);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: fit-content;
+    margin-right: auto;
+}
+.postRight>.postText,
+.postLeft>.postText {
+    padding: 0.25em 1.5em 0.25em 0.2em;
+}
+.postAdmin {
+    margin: 0.5em 10em;
+    text-align: center;
+    font-size: 1em;
+}
+.postAdmin>.postText {
+    padding: 0.2em 0 0.2em 0;
+}
+.formJoin {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--random-color-one);
+    border-bottom: solid 8px var(--random-color-two);
+    height: 5em;
+}
+#name,
+#room,
+#join,
+.randomer {
+    border: none;
+    border-bottom: solid 3px var(--random-color-two);
+    padding: 0.5em 1em 0.25em 1em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.message,
+.send {
+    border-radius: 20px;
+}
+#name,
+#room,
+#join,
+.randomer,
+.message,
+.send {
+    background-color: var(--random-color-one);
+    color: var(--random-color-two);
+    font-size: 1.2em;
+}
+.message,
+.send {
+    border: solid 3px var(--random-color-two);
+}
+.send {
+    padding: 0 0.5em 0 0.5em;
+    margin-left: 1em;
+}
+.message {
+    padding-left: 0.5em;
+}
+#name,
+#room {
+    width: 8em;
+}
+.message {
+    width: 15em;
+}
+#name:hover,
+#room:hover,
+#join:hover,
+.randomer:hover,
+.message:hover,
+.send:hover {
+    background-color: var(--random-color-two);
+    color: var(--random-color-one);
+    cursor: pointer;
+}
+#name:focus,
+#room:focus,
+#join:focus,
+.randomer:focus,
+.message:focus,
+.send:focus {
+    background-color: var(--random-color-two);
+    color: var(--random-color-one);
+    outline: none;
+}
+#name::placeholder,
+#room::placeholder,
+.message::placeholder {
+    color: var(--random-color-two);
+}
+#name:hover::placeholder,
+#room:hover::placeholder,
+.message:hover::placeholder {
+    color: var(--random-color-one);
+}
+
+@media all and (min-width: 1030px) and (max-width:1150px) {
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 1.1em;
+    }
+    p.activity,
+    .postLeft,
+    .postRight {
+        min-width: 14em;
+        max-width: 41em;
+    }
+    p.userList,
+    p.roomList {
+        font-size: 1.4em;
+    }
+}
+@media all and (min-width: 960px) and (max-width: 1030px) {
+    .postAdmin {
+        font-size: 0.8em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 1em;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 14em;
+        max-width: 40em;
+    }
+    #name,
+    #room {
+        width: 7.5em;
+    }
+    .message {
+        width: 14em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 1.3em;
+    }
+}
+@media all and (min-width: 765px) and (max-width: 960px) {
+    .postAdmin {
+        font-size: 0.75em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.9em;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 13em;
+        max-width: 38em;
+    }
+    #name,
+    #room {
+        width: 7em;
+    }
+    .message {
+        width: 13em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 1.2em;
+    }
+}
+@media all and (min-width: 700px) and (max-width: 765px) {
+    .postAdmin {
+        font-size: 0.7em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.85em;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 12.5em;
+        max-width: 32em;
+    }
+    #name,
+    #room {
+        width: 7em;
+    }
+    .message {
+        width: 13em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 1.1em;
+    }
+}
+@media all and (min-width: 600px) and (max-width: 700px) {
+    .postAdmin {
+        font-size: 0.6em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.8em;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 11em;
+        max-width: 26em;
+    }
+    .postRight>.postText,
+    .postLeft>.postText {
+        padding-right: 1em;
+    }
+    #name,
+    #room {
+        width: 6.5em;
+    }
+    .message {
+        width: 12em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 1em;
+    }
+}
+@media all and (min-width: 425px) and (max-width: 600px) {
+    .postAdmin {
+        font-size: 0.45em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.75em;
+        border: 1.5px;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 8.5em;
+        max-width: 13em;
+    }
+    .postRight>.postText,
+    .postLeft>.postText {
+        padding-right: 0.8em;
+    }
+    #name,
+    #room {
+        width: 6.5em;
+    }
+    .message {
+        width: 11em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 0.8em;
+    }
+}
+@media all and (min-width: 365px) and (max-width: 425px) {
+    .postAdmin {
+        font-size: 0.35em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.7em;
+        border: 1.5px;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 7em;
+        max-width: 9.5em;
+    }
+    .postRight>.postText,
+    .postLeft>.postText {
+        padding-right: 0.65em;
+    }
+    #name,
+    #room {
+        width: 6em;
+    }
+    .message {
+        width: 10em;
+    }
+    #join,
+    .randomer,
+    .send {
+        padding: 0 0.25em 0 0.25em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 0.7em;
+    }
+}
+@media all and (max-width: 365px) {
+    .postAdmin {
+        font-size: 0.25em;
+    }
+    #name,
+    #room,
+    #join,
+    .randomer,
+    .message,
+    .send,
+    .postLeft>.postText,
+    .postRight>.postText,
+    .postHeader {
+        font-size: 0.65em;
+        border: 1.5px;
+    }
+    .postLeft,
+    .postRight {
+        min-width: 5.5em;
+        max-width: 6em;
+    }
+    .postRight>.postText,
+    .postLeft>.postText {
+        padding-right: 0.55em;
+    }
+    #name,
+    #room {
+        width: 5em;
+    }
+    .message {
+        width: 9em;
+    }
+    #join,
+    .randomer,
+    .send {
+        padding: 0 0.25em 0 0.25em;
+    }
+    p.activity,
+    p.userList,
+    p.roomList {
+        font-size: 0.6em;
+    }
+}
