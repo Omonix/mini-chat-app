@@ -43,6 +43,7 @@ document.querySelector(".randomer").addEventListener("click", () => {
 document.addEventListener("click", (event) => {
   if (event.target.className === "postText") {
     navigator.clipboard.writeText(event.target.innerHTML);
+    alert("Copied !");
   }
 });
 
