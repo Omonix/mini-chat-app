@@ -1,4 +1,4 @@
-const socket = io("ws://localhost:3500"); //https://mini-chat-app-xeeh.onrender.com
+const socket = io("https://mini-chat-app-xeeh.onrender.com"); //ws://localhost:3500
 
 const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
