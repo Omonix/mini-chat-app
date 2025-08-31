@@ -33,6 +33,7 @@ io.on("connection", (socket) => {
   console.log(`User ${socket.id} (${socket.id.substring(0, 5)}) connected`);
   socket.emit("hello", [socket.id, ""]);
   socket.emit("message", buildMsg(ADMIN, "Welcome on ChatWing !"));
+  io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
   socket.on("enterRoom", ({ name, room }) => {
     const prevRoom = getUser(socket.id)?.room;
     const user = activateUser(socket.id, name, room);
@@ -65,7 +66,6 @@ io.on("connection", (socket) => {
         .to(user.room)
         .emit("message", buildMsg(ADMIN, `${user.name} have joined the room`));
       io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
-      io.to(user.room).emit("userList", { users: getAllUsers() });
     } else {
       socket.emit("error", 301);
     }

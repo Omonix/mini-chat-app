@@ -140,6 +140,11 @@ p.userList {
     border-bottom: solid 8px var(--random-color-two);
     height: 5em;
 }
+.formMsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #name,
 #room,
 #join,
@@ -152,6 +157,7 @@ p.userList {
 }
 .message,
 .send {
+    border: solid 3px var(--random-color-two);
     border-radius: 20px;
 }
 #name,
@@ -162,25 +168,22 @@ p.userList {
 .send {
     background-color: var(--random-color-one);
     color: var(--random-color-two);
-    font-size: 1.2em;
-}
-.message,
-.send {
-    border: solid 3px var(--random-color-two);
+    font-size: 17px;
 }
 .send {
-    padding: 0 0.5em 0 0.5em;
+    padding: 0.2em 0.5em 0.2em 0.5em;
     margin-left: 1em;
 }
 .message {
-    padding-left: 0.5em;
+    padding: 0.3em 0em 0em 1em;
+    width: 15em;
+    height: 1.5em;
+    max-height: 5em;
+    resize: none;
 }
 #name,
 #room {
     width: 8em;
-}
-.message {
-    width: 15em;
 }
 #name:hover,
 #room:hover,
@@ -209,7 +212,10 @@ p.userList {
 }
 #name:hover::placeholder,
 #room:hover::placeholder,
-.message:hover::placeholder {
+.message:hover::placeholder,
+#name:focus::placeholder,
+#room:focus::placeholder,
+.message:focus::placeholder {
     color: var(--random-color-one);
 }
 

@@ -21,8 +21,6 @@ fetch('./errors.json')
     console.error("Erreur lors du chargement JSON :", error);
   });
 
-msgInput.focus();
-
 const escapeHTML = (str) => {
   return str
     .replace(/&/g, "&amp;")
@@ -34,8 +32,11 @@ const escapeHTML = (str) => {
     .replace(/\u2028|\u2029|(\r\n|\n|\r)/g, "<br>");
 }
 const sendMessage = (e) => {
-  e.preventDefault();
-  const msgInput = document.querySelector(".message");
+  try {
+    e.preventDefault();
+  } catch (error) {
+    error;
+  }
   if (msgInput.value) {
     if (nameInput.value) {
       if (chatRoom.value) {
@@ -85,6 +86,21 @@ document.addEventListener("click", (event) => {
 document.querySelector(".formMsg").addEventListener("submit", sendMessage);
 document.querySelector(".formJoin").addEventListener("submit", enterRoom);
 msgInput.addEventListener("keypress", () => socket.emit("activity", nameInput.value));
+msgInput.addEventListener("input", (key) => {
+  if (key.inputType === "insertLineBreak") {
+    sendMessage();
+  } else {
+    if (msgInput.value.length <= 26) {
+      msgInput.style.height = "23px";
+    } else if (msgInput.value.length > 26 && msgInput.value.length <= 53) {
+      msgInput.style.height = `${22 * 2}px`;
+    } else if (msgInput.value.length > 53 && msgInput.value.length <= 80) {
+      msgInput.style.height = `${22 * 3}px`;
+    } else {
+      msgInput.style.height = `${22 * 4}px`;
+    }
+  }
+})
 
 socket.on("hello", (data) => {
   let roomer = "";
@@ -137,9 +153,6 @@ socket.on("activity", (name) => {
 
 socket.on("roomList", ({ rooms, users }) => {
   showRooms(rooms, users);
-});
-socket.on("userList", ({ users }) => {
-  showUsers(users);
 });
 
 const showUsers = (users) => {
