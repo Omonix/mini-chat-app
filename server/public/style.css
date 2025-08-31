@@ -13,16 +13,15 @@ li {
     list-style-type: none;
 }
 p.activity,
-p.userList,
-p.roomList {
+p.userList {
     font-size: 1.5em;
     margin: 0.25em 0 0 1em;
 }
 .chatDisplay {
     text-align: center;
-    width: 100vw;
-    margin: 1em 5em;
+    width: 85vw;
     max-height: 71.5vh;
+    max-width: 95vw;
     overflow-y: scroll;
     scrollbar-width: thin;
 }
@@ -55,6 +54,9 @@ p.roomList {
     border-top-right-radius: 5px;
     border-bottom: solid 3px var(--random-color-two);
 }
+.containChat {
+    display: flex;
+}
 .infoUser {
     display: flex;
     flex-direction: column;
@@ -62,6 +64,34 @@ p.roomList {
 .footer {
     display: flex;
     justify-content: space-around;
+}
+.roomList {
+    background-color: blue;
+    color: red;
+    width: 15vw;
+}
+.oneInfo {
+    background-color: green;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    margin: 0.5em 2em 0.5em 0.75em;
+    padding: 1em 0em 1em 0.5em;
+    transition-duration: 300ms;
+    display: flex;
+    flex-direction: column;
+}
+.oneInfo:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+.oneRoom {
+    font-size: 1.4em;
+}
+.oneUsers {
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .postRight,
 .postLeft {
@@ -197,8 +227,7 @@ p.roomList {
         min-width: 14em;
         max-width: 41em;
     }
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 1.4em;
     }
 }
@@ -230,8 +259,7 @@ p.roomList {
         width: 14em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 1.3em;
     }
 }
@@ -263,8 +291,7 @@ p.roomList {
         width: 13em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 1.2em;
     }
 }
@@ -296,8 +323,7 @@ p.roomList {
         width: 13em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 1.1em;
     }
 }
@@ -333,8 +359,7 @@ p.roomList {
         width: 12em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 1em;
     }
 }
@@ -371,8 +396,7 @@ p.roomList {
         width: 11em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 0.8em;
     }
 }
@@ -414,8 +438,7 @@ p.roomList {
         padding: 0 0.25em 0 0.25em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 0.7em;
     }
 }
@@ -457,8 +480,7 @@ p.roomList {
         padding: 0 0.25em 0 0.25em;
     }
     p.activity,
-    p.userList,
-    p.roomList {
+    p.userList {
         font-size: 0.6em;
     }
 }

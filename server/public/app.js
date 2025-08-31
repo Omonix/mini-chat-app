@@ -1,4 +1,4 @@
-const socket = io("https://mini-chat-app-xeeh.onrender.com"); //ws://localhost:3500
+const socket = io("ws://localhost:3500"); //https://mini-chat-app-xeeh.onrender.com
 
 const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
@@ -100,39 +100,41 @@ socket.on("activity", (name) => {
   }, 3000);
 });
 
+socket.on("roomList", ({ rooms, users }) => {
+  showRooms(rooms, users);
+});
 socket.on("userList", ({ users }) => {
   showUsers(users);
 });
-socket.on("roomList", ({ rooms }) => {
-  showRooms(rooms);
-});
 
 const showUsers = (users) => {
-  usersList.textContent = "";
-  if (users) {
-    usersList.innerHTML = `<em>Users in "${
-      chatRoom.value.substring(0, 1).toUpperCase() +
-      chatRoom.value.substring(1, chatRoom.value.length).toLowerCase()
-    }" :</em>`;
-    users.forEach((user, i) => {
-      usersList.textContent += ` ${user.name}`;
-      if (users.length > 1 && i !== users.length - 1) {
-        usersList.textContent += ",";
+  for (let i = 0; i < users.length; i++) {
+    for (let y = 0; y < users[i].users.length; y++) {
+      if (y === 0) {
+        document.querySelectorAll('.oneUsers')[i].innerText = users[i].users[y];
+        document.querySelectorAll('.oneUsers')[i].title = users[i].users[y];
+      } else {
+        document.querySelectorAll('.oneUsers')[i].innerText += `, ${users[i].users[y]}`;
+        document.querySelectorAll('.oneUsers')[i].title += `, ${users[i].users[y]}`;
       }
-    });
+    }
   }
 };
-const showRooms = (rooms) => {
+const showRooms = (rooms, users) => {
   roomsList.textContent = "";
   if (rooms) {
-    roomsList.innerHTML = `<em>Active rooms :</em>`;
     rooms.forEach((room, i) => {
-      roomsList.textContent += ` ${
-        room.substring(0, 1).toUpperCase() + room.substring(1, room.length)
-      }`;
-      if (rooms.length > 1 && i !== rooms.length - 1) {
-        roomsList.textContent += ",";
-      }
+      let li = document.createElement('li');
+      let thisRoom = document.createElement('p');
+      let users = document.createElement('p');
+      li.className = "oneInfo";
+      thisRoom.className = "oneRoom"
+      users.className = "oneUsers";
+      thisRoom.innerText = `${room.substring(0, 1).toUpperCase() + room.substring(1, room.length)}`;
+      roomsList.appendChild(li);
+      document.querySelectorAll('.oneInfo')[i].appendChild(thisRoom);
+      document.querySelectorAll('.oneInfo')[i].appendChild(users);
     });
+    showUsers(users);
   }
 };

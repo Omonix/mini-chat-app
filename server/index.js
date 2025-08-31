@@ -48,9 +48,6 @@ io.on("connection", (socket) => {
       user.room.substring(0, 1).toUpperCase() +
         user.room.substring(1, user.room.length),
     ]);
-    if (prevRoom) {
-      io.to(prevRoom).emit("userList", { users: getUserInRoom(prevRoom) });
-    }
     socket.join(user.room);
 
     socket.emit(
@@ -66,10 +63,8 @@ io.on("connection", (socket) => {
     socket.broadcast
       .to(user.room)
       .emit("message", buildMsg(ADMIN, `${user.name} have joined the room`));
-    io.to(user.room).emit("userList", {
-      users: getUserInRoom(user.room),
-    });
-    io.emit("roomList", { rooms: getAllActiveRooms() });
+    io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
+    io.to(user.room).emit("userList", { users: getAllUsers() });
   });
 
   socket.on("disconnect", () => {
@@ -80,9 +75,8 @@ io.on("connection", (socket) => {
         "message",
         buildMsg(ADMIN, `${user.name} has left the room`)
       );
-      io.to(user.room).emit("userList", { users: getUserInRoom(user.room) });
       io.emit("roomList", {
-        rooms: getAllActiveRooms(),
+        rooms: getAllActiveRooms(), users: getAllUsers(),
       });
     }
     console.log(
@@ -105,14 +99,11 @@ io.on("connection", (socket) => {
 });
 
 const buildMsg = (name, text) => {
+  let dated = new Date();
   return {
     name,
     text,
-    time: new Intl.DateTimeFormat("default", {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    }).format(new Date()),
+    time: `${`${dated.getHours()}`.length === 1 ? `0${dated.getHours()}` : dated.getHours()}:${`${dated.getMinutes()}`.length === 1 ? `0${dated.getMinutes()}` : dated.getMinutes()}`,
   };
 };
 const activateUser = (id, name, room) => {
@@ -135,3 +126,17 @@ const getUserInRoom = (room) => {
 const getAllActiveRooms = () => {
   return Array.from(new Set(UsersState.users.map((user) => user.room)));
 };
+const getAllUsers = () => {
+  let roomsList = getAllActiveRooms();
+  let usersList = [];
+  let totalList = [];
+  for (let i = 0; i < roomsList.length; i++) {
+    let oneRoom = getUserInRoom(roomsList[i]);
+    usersList = [];
+    for (let y = 0; y < oneRoom.length; y++) {
+      usersList.push(oneRoom[y].name);
+    }
+    totalList.push({room: oneRoom[0].room, users: usersList})
+  }
+  return totalList;
+}
