@@ -49,7 +49,11 @@ const sendMessage = (e) => {
   msgInput.focus();
 };
 const enterRoom = (e) => {
-  e.preventDefault();
+  try {
+    e.preventDefault();
+  } catch (error) {
+    error;
+  }
   if (nameInput.value && chatRoom.value) {
     socket.emit("enterRoom", {
       name: nameInput.value,
@@ -78,9 +82,7 @@ document.addEventListener("click", (event) => {
 
 document.querySelector(".formMsg").addEventListener("submit", sendMessage);
 document.querySelector(".formJoin").addEventListener("submit", enterRoom);
-msgInput.addEventListener("keypress", () => {
-  socket.emit("activity", nameInput.value);
-});
+msgInput.addEventListener("keypress", () => socket.emit("activity", nameInput.value));
 
 socket.on("hello", (data) => {
   let roomer = "";
@@ -119,7 +121,7 @@ socket.on("message", (data) => {
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
 socket.on("error", (code) => {
-  console.log(code)
+  console.log("Error : " + code)
   alert(errors[`err${code}`]);
 })
 
@@ -167,6 +169,10 @@ const showRooms = (rooms, users) => {
       roomsList.appendChild(li);
       document.querySelectorAll('.oneInfo')[i].appendChild(thisRoom);
       document.querySelectorAll('.oneInfo')[i].appendChild(users);
+      document.querySelectorAll('.oneInfo')[i].addEventListener('click', () => {
+        chatRoom.value = document.querySelectorAll('.oneRoom')[i].innerText;
+        enterRoom();
+      })
     });
     showUsers(users);
   }

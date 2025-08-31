@@ -35,36 +35,40 @@ io.on("connection", (socket) => {
   socket.emit("message", buildMsg(ADMIN, "Welcome on ChatWing !"));
   socket.on("enterRoom", ({ name, room }) => {
     const prevRoom = getUser(socket.id)?.room;
-    if (prevRoom) {
-      socket.leave(prevRoom);
-      io.to(prevRoom).emit(
-        "message",
-        buildMsg(ADMIN, `${name} has left the room`)
-      );
-    }
     const user = activateUser(socket.id, name, room);
-    socket.emit("hello", [
-      socket.id,
-      user.room.substring(0, 1).toUpperCase() +
-        user.room.substring(1, user.room.length),
-    ]);
-    socket.join(user.room);
+    if (prevRoom !== user.room) {
+      if (prevRoom) {
+        socket.leave(prevRoom);
+        io.to(prevRoom).emit(
+          "message",
+          buildMsg(ADMIN, `${name} has left the room`)
+        );
+      }
+      socket.emit("hello", [
+        socket.id,
+        user.room.substring(0, 1).toUpperCase() +
+          user.room.substring(1, user.room.length),
+      ]);
+      socket.join(user.room);
 
-    socket.emit(
-      "message",
-      buildMsg(
-        ADMIN,
-        `You have joined the ${
-          user.room.substring(0, 1).toUpperCase() +
-          user.room.substring(1, user.room.length)
-        } room`
-      )
-    );
-    socket.broadcast
-      .to(user.room)
-      .emit("message", buildMsg(ADMIN, `${user.name} have joined the room`));
-    io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
-    io.to(user.room).emit("userList", { users: getAllUsers() });
+      socket.emit(
+        "message",
+        buildMsg(
+          ADMIN,
+          `You have joined the ${
+            user.room.substring(0, 1).toUpperCase() +
+            user.room.substring(1, user.room.length)
+          } room`
+        )
+      );
+      socket.broadcast
+        .to(user.room)
+        .emit("message", buildMsg(ADMIN, `${user.name} have joined the room`));
+      io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
+      io.to(user.room).emit("userList", { users: getAllUsers() });
+    } else {
+      socket.emit("error", 301);
+    }
   });
 
   socket.on("disconnect", () => {
@@ -89,7 +93,7 @@ io.on("connection", (socket) => {
     if (room) {
       io.to(room).emit("message", buildMsg(name, text));
     } else {
-      io.emit("error", "103");
+      io.emit("error", 103);
     }
   });
   socket.on("activity", (name) => {

@@ -19,9 +19,8 @@ p.userList {
 }
 .chatDisplay {
     text-align: center;
-    width: 85vw;
+    width: 80vw;
     max-height: 71.5vh;
-    max-width: 95vw;
     overflow-y: scroll;
     scrollbar-width: thin;
 }
@@ -63,15 +62,18 @@ p.userList {
 }
 .footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
+    margin: 1em 10em 1em 0em;
 }
 .roomList {
-    background-color: blue;
-    color: red;
-    width: 15vw;
+    background-color: #303030;
+    color: var(--random-color-two);
+    border-bottom-right-radius: 5px;
+    width: 20vw;
 }
 .oneInfo {
-    background-color: green;
+    background-color: var(--random-color-one);
+    border: solid 2px var(--random-color-two);
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     margin: 0.5em 2em 0.5em 0.75em;
