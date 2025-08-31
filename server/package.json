@@ -5,17 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon ."
+    "start": "node index.js",
+    "dev": "npx nodemon --experimental-modules index.js"
   },
   "keywords": [],
   "author": "Omonyx",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "express": "^4.19.2",
+    "mongoose": "^8.18.0",
+    "nodemon": "^3.1.10",
     "socket.io": "^4.7.5"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.4"
   }
 }

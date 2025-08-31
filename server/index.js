@@ -1,19 +1,34 @@
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import { Server } from "socket.io";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = process.env.PORT || 3500;
+const PORT = 3500;
 const ADMIN = "Admin";
 const app = express();
+
+dotenv.config();
 app.use(express.static(path.join(__dirname, "public")));
 app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
 app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login/login.html'));
+
 const expressServer = app.listen(PORT, () => {
-  console.log(`Server running on port : ${PORT}`);
+  console.log(`✅ Server running on port : ${PORT}`);
+});
+mongoose.connect(process.env.DB_KEY, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log('✅ Connecté à MongoDB');
+})
+.catch((err) => {
+  console.error('❌ Erreur de connexion MongoDB :', err);
 });
 
 const UsersState = {
@@ -32,10 +47,12 @@ const io = new Server(expressServer, {
 });
 
 io.on("connection", (socket) => {
-  console.log(`User ${socket.id} (${socket.id.substring(0, 5)}) connected`);
+  console.log(`User ${socket.id} (${socket.id.substring(0, 5)}) connected 😍`);
+
   socket.emit("hello", [socket.id, ""]);
-  socket.emit("message", buildMsg(ADMIN, "Welcome on ChatWing !"));
+  socket.emit("message", buildMsg(ADMIN, "Welcome on ChatWings !"));
   io.emit("roomList", { rooms: getAllActiveRooms(), users: getAllUsers() });
+
   socket.on("enterRoom", ({ name, room }) => {
     const prevRoom = getUser(socket.id)?.room;
     const user = activateUser(socket.id, name, room);
@@ -86,7 +103,7 @@ io.on("connection", (socket) => {
       });
     }
     console.log(
-      `User ${socket.id} (${socket.id.substring(0, 5)}) disconnected`
+      `User ${socket.id} (${socket.id.substring(0, 5)}) disconnected 😭`
     );
   });
 

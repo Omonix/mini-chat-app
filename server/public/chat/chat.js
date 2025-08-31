@@ -1,4 +1,4 @@
-const socket = io("ws://localhost:3500/"); //https://mini-chat-app-xeeh.onrender.com
+const socket = io("localhost:3500");
 
 const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
@@ -7,7 +7,7 @@ const activity = document.querySelector(".activity");
 const roomsList = document.querySelector(".roomList");
 const chatDisplay = document.querySelector(".chatDisplay");
 let errors;
-fetch('../errors.json')
+fetch('../assets/json/errors.json')
   .then(response => {
     if (!response.ok) {
       console.log("Error : " + response.status);
@@ -18,7 +18,7 @@ fetch('../errors.json')
     errors = data;
   })
   .catch(error => {
-    console.error("Erreur lors du chargement JSON :", error);
+    console.error("❌ Erreur lors du chargement JSON :", error);
   });
 
 const escapeHTML = (str) => {
@@ -107,7 +107,7 @@ socket.on("hello", (data) => {
   if (data[1] && data[1] !== "") {
     roomer = `- ${data[1]} `;
   }
-  document.title = `ChatWing ${roomer}- ${data[0].substring(0, 5)}`;
+  document.title = `ChatWings ${roomer}💬`;
 });
 socket.on("message", (data) => {
   activity.textContent = "";
