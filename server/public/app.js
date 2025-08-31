@@ -169,8 +169,8 @@ const showUsers = (users) => {
   }
 };
 const showRooms = (rooms, users) => {
-  roomsList.textContent = "";
-  if (rooms) {
+  roomsList.innerHTML = "";
+  if (rooms && rooms.length !== 0) {
     rooms.forEach((room, i) => {
       let li = document.createElement('li');
       let thisRoom = document.createElement('p');
@@ -188,5 +188,10 @@ const showRooms = (rooms, users) => {
       })
     });
     showUsers(users);
+  } else {
+    let noth = document.createElement('p');
+    noth.className = "noRoom";
+    noth.innerText = "No room";
+    roomsList.appendChild(noth);
   }
 };
