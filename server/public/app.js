@@ -29,7 +29,9 @@ const escapeHTML = (str) => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/'/g, "&#039;")
+    .replace(/  /g, "&#8239;&#8239;")
+    .replace(/\u2028|\u2029|(\r\n|\n|\r)/g, "<br>");
 }
 const sendMessage = (e) => {
   e.preventDefault();
@@ -75,7 +77,7 @@ document.querySelector(".randomer").addEventListener("click", () => {
 });
 document.addEventListener("click", (event) => {
   if (event.target.className === "postText") {
-    navigator.clipboard.writeText(event.target.innerHTML);
+    navigator.clipboard.writeText(event.target.innerHTML.replace(/<br>/g, "\n"));
     alert("Copied !");
   }
 });
@@ -108,9 +110,7 @@ socket.on("message", (data) => {
     }">
     <span class="postHeaderTime">${time}</span><span class="postHeaderName">${name}</span>
     </div>
-    <div class="postText">${
-      text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
-    }</div>`;
+    <div class="postText">${text}</div>`;
   } else {
     li.className = "postAdmin";
     li.innerHTML = `<div class="postText">${
