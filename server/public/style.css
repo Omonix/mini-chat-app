@@ -1,5 +1,6 @@
 * {
     transition-duration: 300ms;
+    font-family: monospace;
 }
 :root {
     --random-color-one: #93EC9C;
@@ -78,7 +79,6 @@ p.userList {
     border-top-right-radius: 10px;
     margin: 0.5em 2em 0.5em 0.75em;
     padding: 1em 0em 1em 0.5em;
-    transition-duration: 300ms;
     display: flex;
     flex-direction: column;
 }
@@ -99,6 +99,7 @@ p.userList {
 }
 .noRoom {
     font-size: 1.75em;
+    font-weight: bolder;
     margin: 0.8em 0em 0em 0.5em;
 }
 .postRight,
@@ -149,8 +150,7 @@ p.userList {
     justify-content: center;
     align-items: center;
 }
-#name,
-#room,
+.inputTypeOne,
 #join,
 .randomer {
     border: none;
@@ -159,81 +159,108 @@ p.userList {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.message,
-.send {
+.inputTypeTwo,
+.buttonSend {
     border: solid 3px var(--random-color-two);
     border-radius: 20px;
 }
-#name,
-#room,
+.inputTypeOne,
 #join,
 .randomer,
-.message,
-.send {
+.inputTypeTwo,
+.buttonSend {
     background-color: var(--random-color-one);
     color: var(--random-color-two);
     font-size: 17px;
 }
-.send {
+.buttonSend {
     padding: 0.2em 0.5em 0.2em 0.5em;
     margin-left: 1em;
 }
-.message {
+.inputTypeTwo {
     padding: 0.3em 0em 0em 1em;
     width: 15em;
     height: 1.5em;
     max-height: 5em;
     resize: none;
 }
-#name,
-#room {
+.inputTypeOne {
     width: 8em;
 }
-#name:hover,
-#room:hover,
+.inputTypeOne:hover,
 #join:hover,
 .randomer:hover,
-.message:hover,
-.send:hover {
+.inputTypeTwo:hover,
+.buttonSend:hover {
     background-color: var(--random-color-two);
     color: var(--random-color-one);
     cursor: pointer;
 }
-#name:focus,
-#room:focus,
+.inputTypeOne:focus,
 #join:focus,
 .randomer:focus,
-.message:focus,
-.send:focus {
+.inputTypeTwo:focus,
+.buttonSend:focus {
     background-color: var(--random-color-two);
     color: var(--random-color-one);
     outline: none;
 }
-#name::placeholder,
-#room::placeholder,
-.message::placeholder {
+.inputTypeOne::placeholder,
+.inputTypeTwo::placeholder {
     color: var(--random-color-two);
 }
-#name:hover::placeholder,
-#room:hover::placeholder,
-.message:hover::placeholder,
-#name:focus::placeholder,
-#room:focus::placeholder,
-.message:focus::placeholder {
+.inputTypeOne:hover::placeholder,
+.inputTypeTwo:hover::placeholder,
+.inputTypeOne:focus::placeholder,
+.inputTypeTwo:focus::placeholder {
     color: var(--random-color-one);
+}
+.loginForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.containButtonLog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+#logUser,
+#logPassword {
+    padding-bottom: 0.2em;
+    margin: 0.4em;
+}
+#logSubmit {
+    margin: 0.4em;
+}
+#logBack {
+    background-color: rgb(255, 120, 120);
+    color: red;
+    border-color: red;
+}
+#logBack:hover {
+    background-color: red;
+    color: rgb(255, 120, 120);
 }
 
 @media all and (min-width: 1030px) and (max-width:1150px) {
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 1.1em;
+    }
+    .oneInfo {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+    .oneUsers {
+        font-size: 1em;
     }
     p.activity,
     .postLeft,
@@ -241,7 +268,8 @@ p.userList {
         min-width: 14em;
         max-width: 41em;
     }
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 1.4em;
     }
 }
@@ -249,31 +277,37 @@ p.userList {
     .postAdmin {
         font-size: 0.8em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 1em;
+    }
+    .oneInfo {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+    .oneUsers {
+        font-size: 0.9em;
     }
     .postLeft,
     .postRight {
         min-width: 14em;
         max-width: 40em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 7.5em;
     }
-    .message {
+    .inputTypeTwo {
         width: 14em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 1.3em;
     }
 }
@@ -281,31 +315,37 @@ p.userList {
     .postAdmin {
         font-size: 0.75em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.9em;
+    }
+    .oneInfo {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+    .oneUsers {
+        font-size: 0.7em;
     }
     .postLeft,
     .postRight {
         min-width: 13em;
         max-width: 38em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 7em;
     }
-    .message {
+    .inputTypeTwo {
         width: 13em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 1.2em;
     }
 }
@@ -313,31 +353,37 @@ p.userList {
     .postAdmin {
         font-size: 0.7em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.85em;
+    }
+    .oneInfo {
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+    }
+    .oneUsers {
+        font-size: 0.6em;
     }
     .postLeft,
     .postRight {
         min-width: 12.5em;
         max-width: 32em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 7em;
     }
-    .message {
+    .inputTypeTwo {
         width: 13em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 1.1em;
     }
 }
@@ -345,16 +391,22 @@ p.userList {
     .postAdmin {
         font-size: 0.6em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.8em;
+    }
+    .oneInfo {
+        padding-top: 0.9em;
+        padding-bottom: 0.9em;
+    }
+    .oneUsers {
+        font-size: 0.5em;
     }
     .postLeft,
     .postRight {
@@ -365,15 +417,15 @@ p.userList {
     .postLeft>.postText {
         padding-right: 1em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 6.5em;
     }
-    .message {
+    .inputTypeTwo {
         width: 12em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 1em;
     }
 }
@@ -381,17 +433,23 @@ p.userList {
     .postAdmin {
         font-size: 0.45em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.75em;
         border: 1.5px;
+    }
+    .oneInfo {
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+    }
+    .oneUsers {
+        font-size: 0.4em;
     }
     .postLeft,
     .postRight {
@@ -402,15 +460,15 @@ p.userList {
     .postLeft>.postText {
         padding-right: 0.8em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 6.5em;
     }
-    .message {
+    .inputTypeTwo {
         width: 11em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 0.8em;
     }
 }
@@ -418,17 +476,23 @@ p.userList {
     .postAdmin {
         font-size: 0.35em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.7em;
         border: 1.5px;
+    }
+    .oneInfo {
+        padding-top: 0.70em;
+        padding-bottom: 0.70em;
+    }
+    .oneUsers {
+        font-size: 0.3em;
     }
     .postLeft,
     .postRight {
@@ -439,20 +503,20 @@ p.userList {
     .postLeft>.postText {
         padding-right: 0.65em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 6em;
     }
-    .message {
+    .inputTypeTwo {
         width: 10em;
     }
     #join,
     .randomer,
-    .send {
+    .buttonSend {
         padding: 0 0.25em 0 0.25em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 0.7em;
     }
 }
@@ -460,17 +524,23 @@ p.userList {
     .postAdmin {
         font-size: 0.25em;
     }
-    #name,
-    #room,
+    .inputTypeOne,
     #join,
     .randomer,
-    .message,
-    .send,
+    .inputTypeTwo,
+    .buttonSend,
     .postLeft>.postText,
     .postRight>.postText,
     .postHeader {
         font-size: 0.65em;
         border: 1.5px;
+    }
+    .oneInfo {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+    }
+    .oneUsers {
+        font-size: 0.2em;
     }
     .postLeft,
     .postRight {
@@ -481,20 +551,20 @@ p.userList {
     .postLeft>.postText {
         padding-right: 0.55em;
     }
-    #name,
-    #room {
+    .inputTypeOne {
         width: 5em;
     }
-    .message {
+    .inputTypeTwo {
         width: 9em;
     }
     #join,
     .randomer,
-    .send {
+    .buttonSend {
         padding: 0 0.25em 0 0.25em;
     }
     p.activity,
-    p.userList {
+    p.userList,
+    .oneRoom {
         font-size: 0.6em;
     }
 }

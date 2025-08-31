@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3500;
 const ADMIN = "Admin";
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
-
+app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
+app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
+app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login/login.html'));
 const expressServer = app.listen(PORT, () => {
   console.log(`Server running on port : ${PORT}`);
 });

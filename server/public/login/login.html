@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Log-in</title>
     <link rel="icon" sizes="32x32" href="../logoImg.png" type="image/png" />
     <link rel="stylesheet" href="../reset.css" />
     <link rel="stylesheet" href="../style.css" />
@@ -13,9 +13,18 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="./app.js"></script>
-  </head>
-  <body>
-    
-  </body>
+    <script defer src="./login.js"></script>
+</head>
+<body>
+    <div>
+        <form class="loginForm" action="">
+            <input class="inputTypeTwo" id="logUser" type="text" placeholder="Username...">
+            <input class="inputTypeTwo" id="logPassword" type="password" placeholder="Password...">
+            <div class="containButtonLog">
+                <div class="buttonSend" id="logBack">Back</div>
+                <button class="buttonSend" id="logSubmit">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
 </html>
