@@ -88,6 +88,8 @@ io.on("connection", (socket) => {
     const room = getUser(socket.id)?.room;
     if (room) {
       io.to(room).emit("message", buildMsg(name, text));
+    } else {
+      io.emit("error", "103");
     }
   });
   socket.on("activity", (name) => {

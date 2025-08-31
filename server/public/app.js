@@ -4,18 +4,47 @@ const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
 const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");
-const usersList = document.querySelector(".userList");
 const roomsList = document.querySelector(".roomList");
 const chatDisplay = document.querySelector(".chatDisplay");
+let errors;
+fetch('./errors.json')
+  .then(response => {
+    if (!response.ok) {
+      console.log("Error : " + response.status);
+    }
+    return response.json();
+  })
+  .then(data => {
+    errors = data;
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement JSON :", error);
+  });
 
 msgInput.focus();
 
+const escapeHTML = (str) => {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 const sendMessage = (e) => {
   e.preventDefault();
   const msgInput = document.querySelector(".message");
-  if (msgInput.value && nameInput.value && chatRoom.value) {
-    socket.emit("message", { name: nameInput.value, text: msgInput.value });
-    msgInput.value = "";
+  if (msgInput.value) {
+    if (nameInput.value) {
+      if (chatRoom.value) {
+        socket.emit("message", { name: nameInput.value, text: escapeHTML(msgInput.value) });
+        msgInput.value = "";
+      } else {
+        alert(errors["err101"]);
+      }
+    } else {
+      alert(errors["err102"]);
+    }
   }
   msgInput.focus();
 };
@@ -89,6 +118,10 @@ socket.on("message", (data) => {
   document.querySelector(".chatDisplay").appendChild(li);
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
+socket.on("error", (code) => {
+  console.log(code)
+  alert(errors[`err${code}`]);
+})
 
 let activityTimer;
 socket.on("activity", (name) => {

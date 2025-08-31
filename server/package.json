@@ -1,5 +1,5 @@
 {
-  "name": "chat_test",
+  "name": "mini_chat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "dev": "nodemon ."
   },
   "keywords": [],
-  "author": "Omonix",
+  "author": "Omonyx",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",

@@ -86,9 +86,11 @@ p.userList {
 }
 .oneRoom {
     font-size: 1.4em;
+    font-weight: bold;
 }
 .oneUsers {
     font-size: 1em;
+    font-style: italic;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,7 +123,7 @@ p.userList {
     padding: 0.25em 1.5em 0.25em 0.2em;
 }
 .postAdmin {
-    margin: 0.5em 10em;
+    margin: 1em 10em;
     text-align: center;
     font-size: 1em;
 }
