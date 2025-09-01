@@ -1,16 +1,17 @@
-import axios from "axios";
-import dotenv from "dotenv";
+import axios from 'https://cdn.skypack.dev/axios';
 
 const userInput = document.querySelector('#signUser');
 const emailInput = document.querySelector("#signEmail");
 const passwordInput = document.querySelector("#signPassword");
-dotenv.config();
 
-document.querySelector('#signSubmit').addEventListener('submit', () => {
+document.querySelector('.signinForm').addEventListener('submit', (e) => {
+    e.preventDefault();
     const emailPass = /^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$/;
 
-    if (emailPass.test(emailInput.value)) {
-        const response = axios.post(`${process.env.URL_SERVER}/signup`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
-        console.log(response);
+    if (emailPass.test(emailInput.value) && userInput.value !== "" && passwordInput.value !== "") {
+        const infos = { username: userInput.value, password: passwordInput.value, email: emailInput.value};
+        axios.post(`http://localhost:3500/signin`, infos);
+    } else {
+        console.log("invalid");
     }
 });

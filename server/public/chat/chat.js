@@ -1,5 +1,4 @@
 const socket = io("localhost:3500");
-
 const msgInput = document.querySelector("#message");
 const nameInput = document.querySelector("#name");
 const chatRoom = document.querySelector("#room");

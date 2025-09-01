@@ -14,6 +14,7 @@ const app = express();
 
 dotenv.config();
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 app.use(userRoutes);
 app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
