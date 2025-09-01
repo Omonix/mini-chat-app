@@ -215,31 +215,31 @@ p.userList {
 .inputTypeTwo:focus::placeholder {
     color: var(--random-color-one);
 }
-.loginForm {
+.signinForm {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.containButtonLog {
+.containButtonSign {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: monospace;
 }
-#logUser,
-#logPassword {
+#signUser,
+#signPassword {
     padding-bottom: 0.2em;
     margin: 0.4em;
 }
-#logSubmit {
+#signSubmit {
     margin: 0.4em;
 }
-#logBack {
+#signBack {
     background-color: rgb(255, 120, 120);
     color: red;
     border-color: red;
 }
-#logBack:hover {
+#signBack:hover {
     background-color: red;
     color: rgb(255, 120, 120);
 }

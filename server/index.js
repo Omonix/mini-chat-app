@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { Server } from "socket.io";
 import path from "path";
 import { fileURLToPath } from "url";
+import userRoutes from "./routes/user.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,9 +14,10 @@ const app = express();
 
 dotenv.config();
 app.use(express.static(path.join(__dirname, "public")));
+app.use(userRoutes);
 app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
-app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login/login.html'));
+app.get('/signin', (req, res) => res.sendFile(__dirname + '/public/signin/signin.html'));
 
 const expressServer = app.listen(PORT, () => {
   console.log(`✅ Server running on port : ${PORT}`);
