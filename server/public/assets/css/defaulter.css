@@ -1,0 +1,19 @@
+.bigText {
+    font-size: 12em;
+    font-weight: bolder;
+    text-shadow: 4px 4px 16px black;
+    color: var(--random-color-one);
+}
+.middleText {
+    font-size: 8em;
+    text-shadow: 4px 4px 16px black;
+}
+.littleText {
+    font-size: 2em;
+}
+.containerMaster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5em;
+}

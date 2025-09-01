@@ -1,6 +1,7 @@
+import axios from 'https://cdn.skypack.dev/axios';
+
 const socket = io("localhost:3500");
 const msgInput = document.querySelector("#message");
-const nameInput = document.querySelector("#name");
 const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");
 const roomsList = document.querySelector(".roomList");
@@ -23,17 +24,12 @@ const sendMessage = (e) => {
     error;
   }
   if (msgInput.value) {
-    if (nameInput.value) {
-      if (chatRoom.value) {
-        socket.emit("message", { name: nameInput.value, text: escapeHTML(msgInput.value) });
-        msgInput.value = "";
-      } else {
-        console.log("Error 400: Missing username");
-        alert("Missing username");
-      }
+    if (chatRoom.value) {
+      socket.emit("message", { name: localStorage.getItem("username"), text: escapeHTML(msgInput.value) });
+      msgInput.value = "";
     } else {
-      console.log("Error 400: Missing message");
-      alert("Missing message");
+      console.log("Error 400: Missing room");
+      alert("Missing room");
     }
   }
   msgInput.focus();
@@ -44,9 +40,9 @@ const enterRoom = (e) => {
   } catch (error) {
     error;
   }
-  if (nameInput.value && chatRoom.value) {
+  if (chatRoom.value) {
     socket.emit("enterRoom", {
-      name: nameInput.value,
+      name: localStorage.getItem("username"),
       room: chatRoom.value.toLowerCase(),
     });
   }
@@ -57,19 +53,29 @@ const verifyToken = () => {
     localStorage.clear();
     window.location.href = '../login';
     alert("You are not connected");
+  } else {
+    document.querySelector('.pseudo').innerText = localStorage.getItem("username");
   }
+  document.querySelector(":root").style.setProperty("--random-color-one", localStorage.getItem("colorA") ? localStorage.getItem("colorA") : "#93EC9C");
+  document.querySelector(":root").style.setProperty("--random-color-two", localStorage.getItem("colorB") ? localStorage.getItem("colorB") : "#2CA254");
 }
+verifyToken();
 const random = () => {
   return `#${Math.floor(Math.random() * 255 ** 3).toString(16)}`;
 };
 
-document.querySelector(".randomer").addEventListener("click", () => {
+document.querySelector(".randomer").addEventListener("click", async () => {
+  const colorA = random();
+  const colorB = random();
   document
     .querySelector(":root")
-    .style.setProperty("--random-color-one", random());
+    .style.setProperty("--random-color-one", colorA);
   document
     .querySelector(":root")
-    .style.setProperty("--random-color-two", random());
+    .style.setProperty("--random-color-two", colorB);
+  localStorage.setItem("colorA", colorA);
+  localStorage.setItem("colorB", colorB);
+  const response = await axios.patch(`http://localhost:3500/colors/`, { username: localStorage.getItem("username"), colorA, colorB });
 });
 document.addEventListener("click", (event) => {
   if (event.target.className === "postText") {
@@ -77,10 +83,17 @@ document.addEventListener("click", (event) => {
     alert("Copied !");
   }
 });
+document.querySelector(".pseudo").addEventListener("click", () => {
+  const disconnect = confirm("Do you want to log out ?");
+  if (disconnect) {
+    window.location.href = '../';
+    localStorage.clear();
+  }
+});
 
 document.querySelector(".formMsg").addEventListener("submit", sendMessage);
 document.querySelector(".formJoin").addEventListener("submit", enterRoom);
-msgInput.addEventListener("keypress", () => socket.emit("activity", nameInput.value));
+msgInput.addEventListener("keypress", () => socket.emit("activity", localStorage.getItem("username")));
 msgInput.addEventListener("input", (key) => {
   if (key.inputType === "insertLineBreak") {
     sendMessage();
@@ -109,15 +122,15 @@ socket.on("message", (data) => {
   const { name, text, time } = data;
   const li = document.createElement("li");
   li.className = "post";
-  if (name === nameInput.value) {
+  if (name === localStorage.getItem("username")) {
     li.className = "postLeft";
   }
-  if (name !== nameInput.value && name !== "Admin") {
+  if (name !== localStorage.getItem("username") && name !== "Admin") {
     li.className = "postRight";
   }
   if (name !== "Admin") {
     li.innerHTML = `<div class="postHeader ${
-      name === nameInput.value ? "postHeaderUser" : "postHeaderReply"
+      name === localStorage.getItem("username") ? "postHeaderUser" : "postHeaderReply"
     }">
     <span class="postHeaderTime">${time}</span><span class="postHeaderName">${name}</span>
     </div>
@@ -186,5 +199,3 @@ const showRooms = (rooms, users) => {
     roomsList.appendChild(noth);
   }
 };
-
-verifyToken();

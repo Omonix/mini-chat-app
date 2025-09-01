@@ -20,6 +20,8 @@ router.post("/signin", async(req, res) => {
                 const newUser = new User({
                     username,
                     email,
+                    colorA: "#93EC9C",
+                    colorB: "#2CA254",
                     token,
                     salt,
                     hash,
@@ -38,9 +40,18 @@ router.post("/login", async(req, res) => {
         const userExit = await User.find({ username });
         if (userExit[0]) {
             if (userExit[0].hash === SHA256(userExit[0].salt + password).toString(encBase64)) {
-                res.status(200).json({ message: "User connected successfully", token: userExit[0].token, username: userExit[0].username });
+                res.status(200).json({ message: "User connected successfully", token: userExit[0].token, username: userExit[0].username, colorA: userExit[0].colorA, colorB: userExit[0].colorB });
             } else res.status(401).json({ message: "Invalid username or password" });
         } else res.status(401).json({ message: "Invalid username or password" })
+    } catch (err) {
+        res.status(500).json({ message: err });
+    }
+})
+router.patch("/colors", async (req, res) => {
+    try {
+        const { username, colorA, colorB } = req.body;
+        await User.updateOne({ username }, { colorA, colorB });
+        res.status(200).json({ message: "Colors changed successfully !" });
     } catch (err) {
         res.status(500).json({ message: err });
     }

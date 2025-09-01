@@ -4,6 +4,12 @@ const socket = io("localhost:3500");
 const userInput = document.querySelector('#logUser');
 const passwordInput = document.querySelector("#logPassword");
 
+const verifyToken = () => {
+  document.querySelector(":root").style.setProperty("--random-color-one", localStorage.getItem("colorA") ? localStorage.getItem("colorA") : "#93EC9C");
+  document.querySelector(":root").style.setProperty("--random-color-two", localStorage.getItem("colorB") ? localStorage.getItem("colorB") : "#2CA254");
+}
+verifyToken();
+
 document.querySelector('.loginForm').addEventListener('submit', async(e) => {
     e.preventDefault();
     try {
@@ -16,6 +22,11 @@ document.querySelector('.loginForm').addEventListener('submit', async(e) => {
                     passwordInput.value = "";
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("exp", Date.now());
+                    localStorage.setItem("username", response.data.username);
+                    localStorage.setItem("colorA", response.data.colorA);
+                    localStorage.setItem("colorB", response.data.colorB);
+                    document.querySelector(":root").style.setProperty("--random-color-one", response.data.colorA);
+                    document.querySelector(":root").style.setProperty("--random-color-two", response.data.colorB);
                     window.location.href = '../chat';
                 } else {
                     alert(response.data.message);

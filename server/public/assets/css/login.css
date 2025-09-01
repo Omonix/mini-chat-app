@@ -1,0 +1,28 @@
+.loginForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.containButtonLog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+#logUser,
+#logPassword {
+    padding-bottom: 0.2em;
+    margin: 0.4em;
+}
+#logSubmit {
+    margin: 0.4em;
+}
+#logBack {
+    background-color: rgb(255, 120, 120);
+    color: red;
+    border-color: red;
+}
+#logBack:hover {
+    background-color: red;
+    color: rgb(255, 120, 120);
+}

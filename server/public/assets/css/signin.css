@@ -1,0 +1,28 @@
+.signinForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.containButtonSign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+#signUser,
+#signPassword {
+    padding-bottom: 0.2em;
+    margin: 0.4em;
+}
+#signSubmit {
+    margin: 0.4em;
+}
+#signBack {
+    background-color: rgb(255, 120, 120);
+    color: red;
+    border-color: red;
+}
+#signBack:hover {
+    background-color: red;
+    color: rgb(255, 120, 120);
+}

@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--random-color-one);
+    border-bottom: solid 8px var(--random-color-two);
+    height: 5em;
+    font-size: 1.6em;
+    font-weight: bolder;
+    color: var(--random-color-two);
+}
+.logo,
+.toChat,
+.userParam {
+    text-decoration: none;
+    color: var(--random-color-two);
+    text-shadow: 2px 2px 4px var(--random-color-two);
+}
+.logo:hover,
+.toChat:hover,
+.userParam:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+.lastUpdate {
+    background-color: #303030;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    height: 65vh;
+}
+.imgUpdate {
+    width: 30em;
+    border-radius: 5px;
+    box-shadow: 6px 6px 16px black;
+}
+.imgUpdate:hover {
+    scale: 1.05;
+    cursor: pointer;
+}
+.descriptUpdate {
+    margin-left: 2em;
+    font-size: 1.4em;
+}
