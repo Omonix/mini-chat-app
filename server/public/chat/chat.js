@@ -5,20 +5,6 @@ const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");
 const roomsList = document.querySelector(".roomList");
 const chatDisplay = document.querySelector(".chatDisplay");
-let errors;
-fetch('../assets/json/errors.json')
-  .then(response => {
-    if (!response.ok) {
-      console.log("Error : " + response.status);
-    }
-    return response.json();
-  })
-  .then(data => {
-    errors = data;
-  })
-  .catch(error => {
-    console.error("❌ Erreur lors du chargement JSON :", error);
-  });
 
 const escapeHTML = (str) => {
   return str
@@ -42,10 +28,12 @@ const sendMessage = (e) => {
         socket.emit("message", { name: nameInput.value, text: escapeHTML(msgInput.value) });
         msgInput.value = "";
       } else {
-        alert(errors["err101"]);
+        console.log("Error 400: Missing username");
+        alert("Missing username");
       }
     } else {
-      alert(errors["err102"]);
+      console.log("Error 400: Missing message");
+      alert("Missing message");
     }
   }
   msgInput.focus();
@@ -63,6 +51,14 @@ const enterRoom = (e) => {
     });
   }
 };
+const verifyToken = () => {
+  const expiry = localStorage.getItem("exp");
+  if (Date.now() - expiry >= 86400000) {
+    localStorage.clear();
+    window.location.href = '../login';
+    alert("You are not connected");
+  }
+}
 const random = () => {
   return `#${Math.floor(Math.random() * 255 ** 3).toString(16)}`;
 };
@@ -135,10 +131,6 @@ socket.on("message", (data) => {
   document.querySelector(".chatDisplay").appendChild(li);
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
 });
-socket.on("error", (code) => {
-  console.log("Error : " + code)
-  alert(errors[`err${code}`]);
-})
 
 let activityTimer;
 socket.on("activity", (name) => {
@@ -194,3 +186,5 @@ const showRooms = (rooms, users) => {
     roomsList.appendChild(noth);
   }
 };
+
+verifyToken();

@@ -1,17 +1,38 @@
 import axios from 'https://cdn.skypack.dev/axios';
 
+const socket = io("localhost:3500");
 const userInput = document.querySelector('#signUser');
 const emailInput = document.querySelector("#signEmail");
 const passwordInput = document.querySelector("#signPassword");
 
-document.querySelector('.signinForm').addEventListener('submit', (e) => {
+document.querySelector('.signinForm').addEventListener('submit', async(e) => {
     e.preventDefault();
-    const emailPass = /^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+    const emailPass = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
 
-    if (emailPass.test(emailInput.value) && userInput.value !== "" && passwordInput.value !== "") {
-        const infos = { username: userInput.value, password: passwordInput.value, email: emailInput.value};
-        axios.post(`http://localhost:3500/signin`, infos);
+    if (userInput.value !== "") {
+        if (passwordInput.value !== "") {
+            if (emailPass.test(emailInput.value)) {
+                const response = await axios.post(`http://localhost:3500/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
+
+                if (response.status === 200) {
+                    userInput.value = "";
+                    emailInput.value = "";
+                    passwordInput.value = "";
+                    window.location.href = '../login';
+                } else {
+                    alert(response.data.message);
+                }
+                console.log(response.data.message);
+            } else {
+                console.log("Error 422 : Bad email");
+                alert("Bad email");
+            }
+        } else {
+            console.log("Error 400: Missing password");
+            alert("Missing password");
+        }
     } else {
-        console.log("invalid");
+        console.log("Error 400: Missing username");
+        alert("Missing username");
     }
 });
