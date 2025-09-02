@@ -1,6 +1,5 @@
 import express from "express";
-import SHA256 from "crypto-js/sha256.js";
-import encBase64 from "crypto-js/enc-Base64.js"
+import crypto from "crypto-js"
 import uid2 from "uid2";
 import User from "../models/User.js";
 
@@ -16,7 +15,7 @@ router.post("/signin", async(req, res) => {
             if (!usernameExist[0]) {
                 const token = uid2(64);
                 const salt = uid2(16);
-                const hash = SHA256(salt + password).toString(encBase64);
+                const hash = crypto.SHA256(salt + password).toString(crypto.enc.Base64);
                 const newUser = new User({
                     username,
                     email,
@@ -39,7 +38,7 @@ router.post("/login", async(req, res) => {
         const { username, password } = req.body;
         const userExit = await User.find({ username });
         if (userExit[0]) {
-            if (userExit[0].hash === SHA256(userExit[0].salt + password).toString(encBase64)) {
+            if (userExit[0].hash === crypto.SHA256(userExit[0].salt + password).toString(crypto.enc.Base64)) {
                 res.status(200).json({ message: "User connected successfully", token: userExit[0].token, username: userExit[0].username, colorA: userExit[0].colorA, colorB: userExit[0].colorB });
             } else res.status(401).json({ message: "Invalid username or password" });
         } else res.status(401).json({ message: "Invalid username or password" })

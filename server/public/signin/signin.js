@@ -1,6 +1,6 @@
 import axios from 'https://cdn.skypack.dev/axios';
 
-const socket = io("https://mini-chat-app-xeeh.onrender.com");
+const socket = io("localhost:3500");
 const userInput = document.querySelector('#signUser');
 const emailInput = document.querySelector("#signEmail");
 const passwordInput = document.querySelector("#signPassword");
@@ -24,7 +24,7 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
     if (userInput.value !== "") {
         if (passwordInput.value !== "") {
             if (emailPass.test(emailInput.value)) {
-                const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
+                const response = await axios.post(`http://localhost:3500/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
 
                 if (response.status === 200) {
                     userInput.value = "";
