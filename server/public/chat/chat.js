@@ -1,6 +1,6 @@
 import axios from 'https://cdn.skypack.dev/axios';
 
-const socket = io("localhost:3500");
+const socket = io("https://mini-chat-app-xeeh.onrender.com/");
 const msgInput = document.querySelector("#message");
 const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");
@@ -75,7 +75,7 @@ document.querySelector(".randomer").addEventListener("click", async () => {
     .style.setProperty("--random-color-two", colorB);
   localStorage.setItem("colorA", colorA);
   localStorage.setItem("colorB", colorB);
-  const response = await axios.patch(`http://localhost:3500/colors/`, { username: localStorage.getItem("username"), colorA, colorB });
+  const response = await axios.patch(`https://mini-chat-app-xeeh.onrender.com/colors/`, { username: localStorage.getItem("username"), colorA, colorB });
 });
 document.addEventListener("click", (event) => {
   if (event.target.className === "postText") {
