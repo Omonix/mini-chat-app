@@ -19,10 +19,6 @@ p.userList {
     justify-content: center;
     align-items: center;
 }
-.pseudo {
-    color: var(--random-color-two);
-    font-size: 2em;
-}
 .post {
     font-size: 1.25em;
     color: black;
@@ -135,8 +131,8 @@ p.userList {
     justify-content: space-around;
     align-items: center;
     background-color: var(--random-color-one);
-    border-bottom: solid 8px var(--random-color-two);
-    height: 5em;
+    border-bottom: solid 6px var(--random-color-two);
+    height: 7em;
 }
 .formMsg {
     display: flex;
@@ -144,21 +140,20 @@ p.userList {
     align-items: center;
 }
 #join,
-.randomer {
+.randomer,
+.pseudo {
+    background-color: var(--random-color-one);
+    color: var(--random-color-two);
+    font-size: 17px;
     border: none;
     border-bottom: solid 3px var(--random-color-two);
     padding: 0.5em 1em 0.25em 1em;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-#join,
-.randomer {
-    background-color: var(--random-color-one);
-    color: var(--random-color-two);
-    font-size: 17px;
-}
 #join:hover,
-.randomer:hover {
+.randomer:hover,
+.pseudo:hover {
     background-color: var(--random-color-two);
     color: var(--random-color-one);
     cursor: pointer;
@@ -168,6 +163,13 @@ p.userList {
     background-color: var(--random-color-two);
     color: var(--random-color-one);
     outline: none;
+}
+.pseudo {
+    font-size: 2em;
+    user-select: none;
+}
+.chatLogo {
+    width: 20em;
 }
 @media all and (min-width: 1030px) and (max-width:1150px) {
     #join,

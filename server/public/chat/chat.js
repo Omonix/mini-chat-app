@@ -1,11 +1,12 @@
-import axios from 'https://cdn.skypack.dev/axios';
-
-const socket = io("https://mini-chat-app-xeeh.onrender.com/");
+const socket = io("https://mini-chat-app-xeeh.onrender.com");
 const msgInput = document.querySelector("#message");
 const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");
 const roomsList = document.querySelector(".roomList");
 const chatDisplay = document.querySelector(".chatDisplay");
+/*const imageLogo = document.querySelector(".chatLogo");
+const canvasLogo = document.querySelector(".canvasLogo");
+const ctx = canvasLogo.getContext("2d");*/
 
 const escapeHTML = (str) => {
   return str
@@ -62,6 +63,46 @@ const verifyToken = () => {
 verifyToken();
 const random = () => {
   return `#${Math.floor(Math.random() * 255 ** 3).toString(16)}`;
+};
+const showUsers = (users) => {
+  for (let i = 0; i < users.length; i++) {
+    for (let y = 0; y < users[i].users.length; y++) {
+      if (y === 0) {
+        document.querySelectorAll('.oneUsers')[i].innerText = users[i].users[y];
+        document.querySelectorAll('.oneUsers')[i].title = users[i].users[y];
+      } else {
+        document.querySelectorAll('.oneUsers')[i].innerText += `, ${users[i].users[y]}`;
+        document.querySelectorAll('.oneUsers')[i].title += `, ${users[i].users[y]}`;
+      }
+    }
+  }
+};
+const showRooms = (rooms, users) => {
+  roomsList.innerHTML = "";
+  if (rooms && rooms.length !== 0) {
+    rooms.forEach((room, i) => {
+      let li = document.createElement('li');
+      let thisRoom = document.createElement('p');
+      let users = document.createElement('p');
+      li.className = "oneInfo";
+      thisRoom.className = "oneRoom"
+      users.className = "oneUsers";
+      thisRoom.innerText = `${room.substring(0, 1).toUpperCase() + room.substring(1, room.length)}`;
+      roomsList.appendChild(li);
+      document.querySelectorAll('.oneInfo')[i].appendChild(thisRoom);
+      document.querySelectorAll('.oneInfo')[i].appendChild(users);
+      document.querySelectorAll('.oneInfo')[i].addEventListener('click', () => {
+        chatRoom.value = document.querySelectorAll('.oneRoom')[i].innerText;
+        enterRoom();
+      })
+    });
+    showUsers(users);
+  } else {
+    let noth = document.createElement('p');
+    noth.className = "noRoom";
+    noth.innerText = "No room";
+    roomsList.appendChild(noth);
+  }
 };
 
 document.querySelector(".randomer").addEventListener("click", async () => {
@@ -158,44 +199,12 @@ socket.on("activity", (name) => {
 socket.on("roomList", ({ rooms, users }) => {
   showRooms(rooms, users);
 });
+/*
+canvasLogo.width = imageLogo.width;
+canvasLogo.height = imageLogo.height;
+ctx.drawImage(imageLogo, 0, 0);
+const imageData = ctx.getImageData(0, 0, canvasLogo.width, canvasLogo.height);
+const data = imageData.data;
+console.log(data);
 
-const showUsers = (users) => {
-  for (let i = 0; i < users.length; i++) {
-    for (let y = 0; y < users[i].users.length; y++) {
-      if (y === 0) {
-        document.querySelectorAll('.oneUsers')[i].innerText = users[i].users[y];
-        document.querySelectorAll('.oneUsers')[i].title = users[i].users[y];
-      } else {
-        document.querySelectorAll('.oneUsers')[i].innerText += `, ${users[i].users[y]}`;
-        document.querySelectorAll('.oneUsers')[i].title += `, ${users[i].users[y]}`;
-      }
-    }
-  }
-};
-const showRooms = (rooms, users) => {
-  roomsList.innerHTML = "";
-  if (rooms && rooms.length !== 0) {
-    rooms.forEach((room, i) => {
-      let li = document.createElement('li');
-      let thisRoom = document.createElement('p');
-      let users = document.createElement('p');
-      li.className = "oneInfo";
-      thisRoom.className = "oneRoom"
-      users.className = "oneUsers";
-      thisRoom.innerText = `${room.substring(0, 1).toUpperCase() + room.substring(1, room.length)}`;
-      roomsList.appendChild(li);
-      document.querySelectorAll('.oneInfo')[i].appendChild(thisRoom);
-      document.querySelectorAll('.oneInfo')[i].appendChild(users);
-      document.querySelectorAll('.oneInfo')[i].addEventListener('click', () => {
-        chatRoom.value = document.querySelectorAll('.oneRoom')[i].innerText;
-        enterRoom();
-      })
-    });
-    showUsers(users);
-  } else {
-    let noth = document.createElement('p');
-    noth.className = "noRoom";
-    noth.innerText = "No room";
-    roomsList.appendChild(noth);
-  }
-};
+ctx.putImageData(imageData, 0, 0);*/

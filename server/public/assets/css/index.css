@@ -45,3 +45,8 @@
     margin-left: 2em;
     font-size: 1.4em;
 }
+.bigTitle {
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin-bottom: 0.4em;
+}

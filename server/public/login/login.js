@@ -1,6 +1,3 @@
-import axios from 'https://cdn.skypack.dev/axios';
-
-const socket = io("https://mini-chat-app-xeeh.onrender.com/");
 const userInput = document.querySelector('#logUser');
 const passwordInput = document.querySelector("#logPassword");
 

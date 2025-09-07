@@ -3,23 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chatwings 💬</title>
+    <title>ChatWings 💬</title>
     <link rel="icon" sizes="32x32" href="../assets/img/logoImg.png" type="image/png" />
     <link rel="stylesheet" href="../assets/css/reset.css" />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/chat.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"
       integrity="sha512-11t8Q+vY9JlCrr+PveZKTYJq8n7O09Y5X/pk/aMd3vJugSvu4xOunGEUzaADqL3I8cZKE/pBwwCfXzDkRJh2sQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script defer type="module" src="./chat.js"></script>
+    <script defer src="./chat.js"></script>
   </head>
   <body>
     <main>
       <form class="formJoin">
-        <div class="pseudo">Username</div>
+        <a href="/">
+          <img class="chatLogo" src="../assets/img/logoGreat.png" alt="ChatWings">
+          <!--<canvas class="canvasLogo"></canvas>-->
+        </a>
         <input
           class="inputTypeOne"
           type="text"
@@ -30,6 +34,7 @@
         />
         <button id="join" type="submit">Join</button>
         <button class="randomer" type="button">Random</button>
+        <div class="pseudo">Username</div>
       </form>
       <div class="containChat">
         <ul class="roomList"></ul>

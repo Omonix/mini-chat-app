@@ -1,10 +1,14 @@
 * {
     transition-duration: 300ms;
-    font-family: monospace;
+}
+*::selection {
+  background-color: var(--random-color-two);
+  color: grey;
 }
 :root {
     --random-color-one: #93EC9C;
     --random-color-two: #2CA254;
+    font-family: monospace;
 }
 body {
     background-color: #202020;
@@ -66,6 +70,34 @@ body {
 .inputTypeOne:focus::placeholder,
 .inputTypeTwo:focus::placeholder {
     color: var(--random-color-one);
+}
+.aParent {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1.6em 25vw 0em 25vw;
+}
+.linkType {
+    text-decoration: none;
+    color: var(--random-color-one);
+    text-align: center;
+}
+.linkType:hover {
+    color: var(--random-color-two);
+}
+.backButton {
+    text-decoration: none;
+    background-color: rgb(215, 7, 7);
+    color: rgb(100, 0, 0);
+    border: solid 3px rgb(100, 0, 0);
+    border-radius: 20px;
+    font-size: 17px;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    font-family: monospace;
+}
+.backButton:hover {
+    background-color: rgb(100, 0, 0);
+    color: rgb(215, 7, 7);
 }
 
 @media all and (min-width: 1030px) and (max-width:1150px) {
