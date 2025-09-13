@@ -19,11 +19,8 @@ p.userList {
     justify-content: center;
     align-items: center;
 }
-.post {
-    font-size: 1.25em;
-    color: black;
-}
-.postText {
+.postTextAdmin,
+.postTextUser {
     background-color: white;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -114,8 +111,8 @@ p.userList {
     width: fit-content;
     margin-right: auto;
 }
-.postRight>.postText,
-.postLeft>.postText {
+.postRight>.postTextUser,
+.postLeft>.postTextUser {
     padding: 0.25em 1.5em 0.25em 0.2em;
 }
 .postAdmin {
@@ -123,7 +120,7 @@ p.userList {
     text-align: center;
     font-size: 1em;
 }
-.postAdmin>.postText {
+.postAdmin>.postTextAdmin {
     padding: 0.2em 0 0.2em 0;
 }
 .formJoin {
@@ -164,10 +161,6 @@ p.userList {
     color: var(--random-color-one);
     outline: none;
 }
-.pseudo {
-    font-size: 2em;
-    user-select: none;
-}
 .canvasLogo,
 .chatLogo {
     width: 20em;
@@ -180,8 +173,9 @@ p.userList {
 @media all and (min-width: 1030px) and (max-width:1150px) {
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 1.1em;
     }
@@ -209,8 +203,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 1em;
     }
@@ -238,8 +233,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.9em;
     }
@@ -267,8 +263,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.85em;
     }
@@ -296,8 +293,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.8em;
     }
@@ -313,8 +311,8 @@ p.userList {
         min-width: 11em;
         max-width: 26em;
     }
-    .postRight>.postText,
-    .postLeft>.postText {
+    .postRight>.postTextUser,
+    .postLeft>.postTextUser {
         padding-right: 1em;
     }
     p.activity,
@@ -329,8 +327,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.75em;
         border: 1.5px;
@@ -347,8 +346,8 @@ p.userList {
         min-width: 8.5em;
         max-width: 13em;
     }
-    .postRight>.postText,
-    .postLeft>.postText {
+    .postRight>.postTextUser,
+    .postLeft>.postTextUser {
         padding-right: 0.8em;
     }
     p.activity,
@@ -363,8 +362,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.7em;
         border: 1.5px;
@@ -381,8 +381,8 @@ p.userList {
         min-width: 7em;
         max-width: 9.5em;
     }
-    .postRight>.postText,
-    .postLeft>.postText {
+    .postRight>.postTextUser,
+    .postLeft>.postTextUser {
         padding-right: 0.65em;
     }
     p.activity,
@@ -397,8 +397,9 @@ p.userList {
     }
     #join,
     .randomer,
-    .postLeft>.postText,
-    .postRight>.postText,
+    .pseudo,
+    .postLeft>.postTextUser,
+    .postRight>.postTextUser,
     .postHeader {
         font-size: 0.65em;
         border: 1.5px;
@@ -415,8 +416,8 @@ p.userList {
         min-width: 5.5em;
         max-width: 6em;
     }
-    .postRight>.postText,
-    .postLeft>.postText {
+    .postRight>.postTextUser,
+    .postLeft>.postTextUser {
         padding-right: 0.55em;
     }
     p.activity,

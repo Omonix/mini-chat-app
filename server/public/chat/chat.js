@@ -150,14 +150,9 @@ verifyToken();
 document.querySelector(".randomer").addEventListener("click", async () => {
   const colorA = random();
   const colorB = random();
-  document
-    .querySelector(":root")
-    .style.setProperty("--random-color-one", colorA);
-  document
-    .querySelector(":root")
-    .style.setProperty("--random-color-two", colorB);
   localStorage.setItem("colorA", colorA);
   localStorage.setItem("colorB", colorB);
+  verifyToken();
   await axios.patch(`https://mini-chat-app-xeeh.onrender.com/colors/`, { username: localStorage.getItem("username"), colorA, colorB });
 });
 document.addEventListener("click", (event) => {
@@ -204,7 +199,6 @@ socket.on("message", (data) => {
   activity.textContent = "";
   const { name, text, time } = data;
   const li = document.createElement("li");
-  li.className = "post";
   if (name === localStorage.getItem("username")) {
     li.className = "postLeft";
   }
@@ -217,15 +211,24 @@ socket.on("message", (data) => {
     }">
     <span class="postHeaderTime">${time}</span><span class="postHeaderName">${name}</span>
     </div>
-    <div class="postText">${text}</div>`;
+    <div class="postTextUser">${text}</div>`;
   } else {
     li.className = "postAdmin";
-    li.innerHTML = `<div class="postText">${
+    li.innerHTML = `<div class="postTextAdmin">${
       text.substring(0, 1).toUpperCase() + text.substring(1, text.length)
     }</div>`;
   }
   document.querySelector(".chatDisplay").appendChild(li);
   chatDisplay.scrollTop = chatDisplay.scrollHeight;
+});
+socket.on("error", (data) => {
+  if (data[0] === 103) {
+    msgInput.value = data[1];
+    console.log("Error : " + data[0]);
+    alert("you did not join the room");
+  } else {
+    console.log("Error : " + data)
+  }
 });
 
 let activityTimer;

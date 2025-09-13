@@ -1,4 +1,4 @@
-const imageLogo = document.querySelector(".imgUpdate");
+const imageLogo = document.querySelector(".imgLogo");
 const canvasLogo = document.querySelector(".canvasLogo");
 const ctx = canvasLogo.getContext("2d");
 
@@ -16,6 +16,8 @@ const verifyToken = () => {
       handleColorImg(hexaToRGB(localStorage.getItem("colorA")), hexaToRGB(localStorage.getItem("colorB")));
     }
   } else {
+    imageLogo.style.display = "auto";
+    canvasLogo.style.display = "none";
     document.querySelector('.userParam').innerHTML = "Log in";
     document.querySelector('.userParam').href = "/login";
   }

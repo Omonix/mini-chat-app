@@ -18,10 +18,13 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
                 const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
 
                 if (response.status === 200) {
+                    hidden = "";
+                    for (let i = 0; i < emailInput.value.split("@")[0].length - 2; i++) hidden += "*"
+                    alert(`We just send your code at ${emailInput.value[0]}${hidden}${emailInput.value.split("@")[0][emailInput.value.split("@")[0].length - 1]}@${emailInput.value.split("@")[1]}`)
                     userInput.value = "";
                     emailInput.value = "";
                     passwordInput.value = "";
-                    window.location.href = '../login';
+                    window.location.href = '../verify';
                 } else {
                     alert(response.data.message);
                 }

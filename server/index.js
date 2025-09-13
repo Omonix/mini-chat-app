@@ -20,6 +20,7 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
 app.get('/signin', (req, res) => res.sendFile(__dirname + '/public/signin/signin.html'));
 app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login/login.html'));
+app.get('/verify', (req, res) => res.sendFile(__dirname + '/public/verify/verify.html'));
 app.get('/*', (req, res) => res.sendFile(__dirname + '/public/defaulter/defaulter.html'));
 
 const expressServer = app.listen(PORT, () => {
@@ -117,7 +118,7 @@ io.on("connection", (socket) => {
     if (room) {
       io.to(room).emit("message", buildMsg(name, text));
     } else {
-      io.emit("error", 103);
+      io.emit("error", [103, text]);
     }
   });
   socket.on("activity", (name) => {
