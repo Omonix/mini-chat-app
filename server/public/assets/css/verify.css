@@ -1,0 +1,14 @@
+.formVerify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.emailInput {
+    margin-top: 1em;
+}
+.codeInput {
+    margin-top: 0.5em;
+}
+.buttonSend {
+    margin-top: 1.5em;
+}

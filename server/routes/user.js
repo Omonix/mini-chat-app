@@ -42,7 +42,7 @@ router.post("/signin", async(req, res) => {
                 from: `ChatWings <${process.env.EMAIL_PASSER}>`,
                 to: email,
                 subject: "Verification code",
-                html: `<p>Hello new user !<br>This is your code to verify your account on Chatwings : <strong>${code}</strong><br>WARING : This code is valid for next 24 hours after the date has passed your account will be deleted.</p>`
+                html: `<p>Hello new user !</p><br><p>This is your code to valid your Chatwings account : <strong>${code}</strong></p><p>WARING : This code is valid for next 24 hours.</p><br><p>Go <a href="https://mini-chat-app-xeeh.onrender.com/verify">actived my account</a> with code</p>`
                 };
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
@@ -87,11 +87,11 @@ router.patch("/verify", async (req, res) => {
     try {
         const { email, code } = req.body;
         const userExiter = await User.find({ email });
-        if (userExiter[0].code === code) {
-            await userExiter[0].updateOne({ $unset: {code: "" , expiresAt: null } })
-            res.status(200).json({ message: "Account verified" });
-        } else {
-            res.status(401).json({ message: "Invalid code" });
+        if (userExiter[0]) {
+            if (userExiter[0].code === code) {
+                await userExiter[0].updateOne({ $unset: {code: "" , expiresAt: null } })
+                res.status(200).json({ message: "Account verified" });
+            }
         }
     } catch (err) {
         res.status(500).json({ message: err });
