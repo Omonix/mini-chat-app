@@ -32,11 +32,14 @@
     border-radius: 10px;
     height: 65vh;
 }
+.canvasLogo,
 .imgUpdate {
     width: 30em;
     border-radius: 5px;
+    padding: 1em;
     box-shadow: 6px 6px 16px black;
 }
+.canvasLogo:hover,
 .imgUpdate:hover {
     scale: 1.05;
     cursor: pointer;

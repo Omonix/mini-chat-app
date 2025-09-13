@@ -168,8 +168,14 @@ p.userList {
     font-size: 2em;
     user-select: none;
 }
+.canvasLogo,
 .chatLogo {
     width: 20em;
+}
+.canvasLogo:hover,
+.chatLogo:hover {
+    cursor: pointer;
+    scale: 1.1;
 }
 @media all and (min-width: 1030px) and (max-width:1150px) {
     #join,
