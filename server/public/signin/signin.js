@@ -1,3 +1,5 @@
+//import { response } from "express";
+
 const userInput = document.querySelector('#signUser');
 const emailInput = document.querySelector("#signEmail");
 const passwordInput = document.querySelector("#signPassword");
@@ -15,9 +17,7 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
     if (userInput.value !== "") {
         if (passwordInput.value !== "") {
             if (emailPass.test(emailInput.value)) {
-                const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value});
-
-                if (response.status === 200) {
+                await axios.post(`https://mini-chat-app-xeeh.onrender.com/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value}).then(response => {
                     hidden = "";
                     for (let i = 0; i < emailInput.value.split("@")[0].length - 2; i++) hidden += "*"
                     alert(`We just send your code at ${emailInput.value[0]}${hidden}${emailInput.value.split("@")[0][emailInput.value.split("@")[0].length - 1]}@${emailInput.value.split("@")[1]}`)
@@ -25,10 +25,12 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
                     emailInput.value = "";
                     passwordInput.value = "";
                     window.location.href = '../verify';
-                } else {
-                    alert(response.data.message);
-                }
-                console.log(response.data.message);
+                }).catch(err => {
+                    if (err.response) {
+                        console.log(err.response.data.message);
+                        alert(err.response.data.message);
+                    }
+                });
             } else {
                 console.log("Error 422 : Bad email");
                 alert("Bad email");

@@ -12,9 +12,7 @@ document.querySelector('.loginForm').addEventListener('submit', async(e) => {
     try {
         if (userInput.value !== "") {
             if (passwordInput.value !== "") {
-                const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/login/`, { username: userInput.value, password: passwordInput.value });
-
-                if (response.status === 200) {
+                const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/login/`, { username: userInput.value, password: passwordInput.value }).then(response => {
                     userInput.value = "";
                     passwordInput.value = "";
                     localStorage.setItem("token", response.data.token);
@@ -25,10 +23,12 @@ document.querySelector('.loginForm').addEventListener('submit', async(e) => {
                     document.querySelector(":root").style.setProperty("--random-color-one", response.data.colorA);
                     document.querySelector(":root").style.setProperty("--random-color-two", response.data.colorB);
                     window.location.href = '../chat';
-                } else {
-                    alert(response.data.message);
-                }
-                console.log(response.data.message);
+                }).catch(err => {
+                    if (err.response) {
+                        console.log(err.response.data.message);
+                        alert(err.response.data.message);
+                    }
+                });
             } else {
                 console.log("Error 400: Missing password");
                 alert("Missing password");
