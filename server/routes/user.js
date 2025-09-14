@@ -3,19 +3,11 @@ import crypto from "crypto-js"
 import uid2 from "uid2";
 import User from "../models/User.js";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
+//import { Resend } from "resend";
 
 dotenv.config();
+//const resend = new Resend(process.env.RESEND_KEY);
 const router = express.Router();
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_NODEMAIL,
-    pass: process.env.PASSWORD_NODEMAIL
-  },
-  port: 587,
-  secure: false,
-});
 
 router.post("/signin", async(req, res) => {
     try {
@@ -40,18 +32,12 @@ router.post("/signin", async(req, res) => {
                     code,
                     expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
                 });
-                const mailOptions = {
-                from: `ChatWings <${process.env.EMAIL_PASSER}>`,
-                to: email,
-                subject: "Verification code",
-                html: `<p>Hello new user !</p><br><p>This is your code to valid your Chatwings account : <strong>${code}</strong></p><p>WARING : This code is valid for next 24 hours.</p><br><p>Go <a href="https://mini-chat-app-xeeh.onrender.com/verify">actived my account</a> with code</p>`
-                };
-                transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                        return console.error("Erreur :", error);
-                    }
-                    console.log("Email envoyé :", info.response);
-                });
+                /*resend.emails.send({
+                    from: `ChatWings <${process.env.EMAIL_ADMIN}>`,
+                    to: email,
+                    subject: 'Verification code',
+                    html: `<p>Hello new user !</p><br><p>This is your code to valid your Chatwings account : <strong>${code}</strong></p><p>WARING : This code is valid for next 24 hours.</p><br><p>Go <a href="http://localhost:3500/verify">actived my account</a> with code</p>`
+                });*/
                 await newUser.save();
                 return res.status(200).json({ message: "User created successfully !" })
             } else return res.status(409).json({ message: "Username already used"});

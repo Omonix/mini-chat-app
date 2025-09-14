@@ -8,15 +8,26 @@ const imageLogo = document.querySelector(".chatLogo");
 const canvasLogo = document.querySelector(".canvasLogo");
 const ctx = canvasLogo.getContext("2d");
 
-const escapeHTML = (str) => {
-  return str
+const escapeHTML = (str, direction) => {
+  if (direction) {
+    return str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;")
-    .replace(/  /g, "&#8239;&#8239;")
+    .replace(/  /g, "&emsp;&emsp;")
     .replace(/\u2028|\u2029|(\r\n|\n|\r)/g, "<br>");
+  } else {
+    return str
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'")
+      .replace(/  /g, "  ")
+      .replace(/<br>/g, "\n");
+  }
 }
 const sendMessage = (e) => {
   try {
@@ -26,7 +37,7 @@ const sendMessage = (e) => {
   }
   if (msgInput.value) {
     if (chatRoom.value) {
-      socket.emit("message", { name: localStorage.getItem("username"), text: escapeHTML(msgInput.value) });
+      socket.emit("message", { name: localStorage.getItem("username"), text: escapeHTML(msgInput.value, true) });
       msgInput.value = "";
     } else {
       console.log("Error 400: Missing room");
@@ -156,8 +167,8 @@ document.querySelector(".randomer").addEventListener("click", async () => {
   await axios.patch(`https://mini-chat-app-xeeh.onrender.com/colors/`, { username: localStorage.getItem("username"), colorA, colorB });
 });
 document.addEventListener("click", (event) => {
-  if (event.target.className === "postText") {
-    navigator.clipboard.writeText(event.target.innerHTML.replace(/<br>/g, "\n"));
+  if (event.target.className === "postTextUser") {
+    navigator.clipboard.writeText(escapeHTML(event.target.innerHTML, false));
     alert("Copied !");
   }
 });

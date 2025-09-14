@@ -1,5 +1,3 @@
-//import { response } from "express";
-
 const userInput = document.querySelector('#signUser');
 const emailInput = document.querySelector("#signEmail");
 const passwordInput = document.querySelector("#signPassword");
@@ -20,7 +18,8 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
                 await axios.post(`https://mini-chat-app-xeeh.onrender.com/signin/`, { username: userInput.value, password: passwordInput.value, email: emailInput.value}).then(response => {
                     hidden = "";
                     for (let i = 0; i < emailInput.value.split("@")[0].length - 2; i++) hidden += "*"
-                    alert(`We just send your code at ${emailInput.value[0]}${hidden}${emailInput.value.split("@")[0][emailInput.value.split("@")[0].length - 1]}@${emailInput.value.split("@")[1]}`)
+                    //alert(`We just send your code at ${emailInput.value[0]}${hidden}${emailInput.value.split("@")[0][emailInput.value.split("@")[0].length - 1]}@${emailInput.value.split("@")[1]}`)
+                    alert("We have received your request and are taking it into consideration.");
                     userInput.value = "";
                     emailInput.value = "";
                     passwordInput.value = "";

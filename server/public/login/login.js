@@ -12,7 +12,7 @@ document.querySelector('.loginForm').addEventListener('submit', async(e) => {
     try {
         if (userInput.value !== "") {
             if (passwordInput.value !== "") {
-                const response = await axios.post(`https://mini-chat-app-xeeh.onrender.com/login/`, { username: userInput.value, password: passwordInput.value }).then(response => {
+                await axios.post(`https://mini-chat-app-xeeh.onrender.com/login/`, { username: userInput.value, password: passwordInput.value }).then(response => {
                     userInput.value = "";
                     passwordInput.value = "";
                     localStorage.setItem("token", response.data.token);
