@@ -19,11 +19,11 @@ document.querySelector('.signinForm').addEventListener('submit', async(e) => {
                     hidden = "";
                     for (let i = 0; i < emailInput.value.split("@")[0].length - 2; i++) hidden += "*"
                     //alert(`We just send your code at ${emailInput.value[0]}${hidden}${emailInput.value.split("@")[0][emailInput.value.split("@")[0].length - 1]}@${emailInput.value.split("@")[1]}`)
-                    alert("We have received your request and are taking it into consideration.");
+                    alert("Account created")
                     userInput.value = "";
                     emailInput.value = "";
                     passwordInput.value = "";
-                    window.location.href = '../verify';
+                    window.location.href = '../login';
                 }).catch(err => {
                     if (err.response) {
                         console.log(err.response.data.message);

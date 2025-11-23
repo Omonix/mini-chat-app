@@ -9,4 +9,3 @@ const verifyToken = () => {
   document.querySelector(":root").style.setProperty("--random-color-two", localStorage.getItem("colorB") ? localStorage.getItem("colorB") : "#2CA254");
 }
 verifyToken();
-console.log("eddc");

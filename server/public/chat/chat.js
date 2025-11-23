@@ -1,4 +1,4 @@
-const socket = io("https://mini-chat-app-xeeh.onrender.com/");
+const socket = io("https://mini-chat-app-xeeh.onrender.com");
 const msgInput = document.querySelector("#message");
 const chatRoom = document.querySelector("#room");
 const activity = document.querySelector(".activity");

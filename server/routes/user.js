@@ -30,7 +30,7 @@ router.post("/signin", async(req, res) => {
                     salt,
                     hash,
                     code,
-                    expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                    //expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
                 });
                 /*resend.emails.send({
                     from: `ChatWings <${process.env.EMAIL_ADMIN}>`,
@@ -71,7 +71,7 @@ router.patch("/colors", async (req, res) => {
         return res.status(500).json({ message: err });
     }
 })
-router.patch("/verify", async (req, res) => {
+/*router.patch("/verify", async (req, res) => {
     try {
         const { email, code } = req.body;
         const userExiter = await User.find({ email });
@@ -84,6 +84,6 @@ router.patch("/verify", async (req, res) => {
     } catch (err) {
         return res.status(500).json({ message: err });
     }
-})
+})*/
 
 export default router;

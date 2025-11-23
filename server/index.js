@@ -20,16 +20,13 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 app.get('/chat', (req, res) => res.sendFile(__dirname + '/public/chat/chat.html'));
 app.get('/signin', (req, res) => res.sendFile(__dirname + '/public/signin/signin.html'));
 app.get('/login', (req, res) => res.sendFile(__dirname + '/public/login/login.html'));
-app.get('/verify', (req, res) => res.sendFile(__dirname + '/public/verify/verify.html'));
+//app.get('/verify', (req, res) => res.sendFile(__dirname + '/public/verify/verify.html'));
 app.get('/*', (req, res) => res.sendFile(__dirname + '/public/defaulter/defaulter.html'));
 
 const expressServer = app.listen(PORT, () => {
   console.log(`✅ Server running on port : ${PORT}`);
 });
-mongoose.connect(process.env.DB_KEY, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(process.env.DB_KEY)
 .then(() => {
   console.log('✅ Connecté à MongoDB');
 })
