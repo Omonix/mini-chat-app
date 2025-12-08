@@ -35,7 +35,8 @@ const sendMessage = (e) => {
   } catch (error) {
     error;
   }
-  if (msgInput.value) {
+  msgInput.value = msgInput.value.replace(/(\r?\n){2,}/g, '\n').trim()
+  if (msgInput.value !== "") {
     if (chatRoom.value) {
       socket.emit("message", { name: localStorage.getItem("username"), text: escapeHTML(msgInput.value, true) });
       msgInput.value = "";
